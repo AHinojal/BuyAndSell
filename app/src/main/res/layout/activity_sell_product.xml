@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="hinojalrobledo.myapplication.SellProduct">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+
+        <ImageButton
+            android:id="@+id/imageProduct"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/imagebase"
+            android:scaleType="fitCenter"
+        />
+
+        <EditText
+            android:id="@+id/et_productName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Producto"
+            android:inputType="text"
+        />
+
+        <EditText
+            android:id="@+id/et_descriptionProduct"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:hint="Descripcion del producto"
+            android:inputType="text"
+        />
+
+        <EditText
+            android:id="@+id/et_priceProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Precio"
+            android:inputType="number"
+            />
+
+        <EditText
+            android:id="@+id/et_emailSeller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electrónico"
+            android:inputType="text"
+        />
+
+        <Button
+            android:id="@+id/buttonSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ENVIAR"
+            android:textSize="35sp"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>

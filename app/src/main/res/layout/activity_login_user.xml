@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="hinojalrobledo.myapplication.LoginUser">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:src="@drawable/imagelogin"
+    />
+
+    <EditText
+        android:id="@+id/et_EmailUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"
+    />
+
+    <EditText
+        android:id="@+id/et_PasswordUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+    />
+
+    <Button
+        android:id="@+id/startSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="175dp"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:text="INICIAR SESIÓN"
+
+    />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="140dp"
+        android:layout_gravity="center"
+        android:text="REGISTRARSE"
+    />
+
+</LinearLayout>
