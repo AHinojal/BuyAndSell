@@ -1,4 +1,4 @@
-package hinojalrobledo.myapplication;
+package hinojalrobledo.myapplication.activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -11,14 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import hinojalrobledo.myapplication.R;
+import hinojalrobledo.myapplication.databases.StructureBBDD;
+import hinojalrobledo.myapplication.databases.StructureBBDDHelper;
 
 public class SellProduct extends AppCompatActivity {
 
     ImageButton imageProduct;
-    EditText nameProduct,descriptionProduct,priceProduct;
-    EditText emailSeller;
+    EditText nameProduct,descriptionProduct,priceProduct, emailSeller;
     Button buttonSend;
 
     @Override
@@ -32,6 +34,8 @@ public class SellProduct extends AppCompatActivity {
         priceProduct = (EditText) findViewById(R.id.et_priceProduct);
         buttonSend = (Button) findViewById(R.id.buttonSend);
         emailSeller = (EditText) findViewById(R.id.et_emailSeller);
+
+        final StructureBBDDHelper helper;
 
         Bundle extra = getIntent().getExtras();
         String emailUser = null;
@@ -47,7 +51,8 @@ public class SellProduct extends AppCompatActivity {
             }
         });
 
-        final StructureBBDDHelper helper = new StructureBBDDHelper (this);
+        helper = new StructureBBDDHelper(getApplicationContext());
+
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,40 +67,8 @@ public class SellProduct extends AppCompatActivity {
                 values.put(StructureBBDD.COLUMN5_PRODUCTS, priceProduct.getText().toString());
                 values.put(StructureBBDD.COLUMN6_PRODUCTS, emailSeller.getText().toString());
 
-                long newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS, null, values);
-                Toast.makeText(getApplicationContext(), "No se ha podido guardar. ¡Intentelo de nuevo! " + newRowId, Toast.LENGTH_LONG).show();
-
-                /*if(newRowId > -1){
-                    Toast.makeText(getApplicationContext(), "asfsdgs", Toast.LENGTH_LONG).show();
-
-                    //Para que un activity llame a otro activity -> Intent
-                    Intent intentBackLogin = new Intent(SellProduct.this, LoginUser.class);
-                    SellProduct.this.startActivity(intentBackLogin);
-                }else{
-                    Toast.makeText(getApplicationContext(), "No se ha podido guardar. ¡Intentelo de nuevo! ", Toast.LENGTH_LONG).show();
-                }*/
-            }
-        });
-
-        /*final StructureBBDDHelper helper = new StructureBBDDHelper (this);
-        final Integer id = 1;
-
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Gets the data repository in write mode
-                SQLiteDatabase db = helper.getWritableDatabase();
-
-                // Create a new map of values, where column names are the keys
-                ContentValues values = new ContentValues();
-                values.put(StructureBBDD.COLUMN1_PRODUCTS, Integer.toString(id));
-                values.put(StructureBBDD.COLUMN2_PRODUCTS, nameProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN3_PRODUCTS, nameProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN4_PRODUCTS, descriptionProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN5_PRODUCTS, priceProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN6_PRODUCTS, emailSeller.getText().toString());
-
-                long newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS,null, values);
+                // Insert the new row, returning the primary key value of the new row
+                long newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS, StructureBBDD.COLUMN1_PRODUCTS, values);
 
                 if(newRowId > -1){
                     Toast.makeText(getApplicationContext(), "El anuncio se ha incluido perfectamente", Toast.LENGTH_LONG).show();
@@ -106,7 +79,7 @@ public class SellProduct extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "No se ha podido guardar. ¡Intentelo de nuevo! ", Toast.LENGTH_LONG).show();
                 }
             }
-        });*/
+        });
     }
 
     private void loadImage() {

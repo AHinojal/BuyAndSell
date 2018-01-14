@@ -1,4 +1,4 @@
-package hinojalrobledo.myapplication;
+package hinojalrobledo.myapplication.activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import hinojalrobledo.myapplication.R;
+import hinojalrobledo.myapplication.databases.StructureBBDD;
+import hinojalrobledo.myapplication.databases.StructureBBDDHelper;
 
 public class RegisterUser extends AppCompatActivity {
 

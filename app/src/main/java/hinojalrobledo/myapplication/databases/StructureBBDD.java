@@ -1,4 +1,4 @@
-package hinojalrobledo.myapplication;
+package hinojalrobledo.myapplication.databases;
 
 public class StructureBBDD {
     // To prevent someone from accidentally instantiating the contract class,
@@ -23,7 +23,6 @@ public class StructureBBDD {
         public static final String COLUMN6_PRODUCTS = "EmailVendedor";
 
 
-
     public static final String CREATE_TABLE_USERS =
             "CREATE TABLE " + StructureBBDD.TABLE_USERS + " (" +
                     StructureBBDD.COLUMN1_USERS + " TEXT," +
@@ -34,11 +33,11 @@ public class StructureBBDD {
 
     public static final String CREATE_TABLE_PRODUCTS =
             "CREATE TABLE " + StructureBBDD.TABLE_PRODUCTS + " (" +
-                    //StructureBBDD.COLUMN1_PRODUCTS + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    StructureBBDD.COLUMN1_PRODUCTS + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     StructureBBDD.COLUMN2_PRODUCTS + " TEXT," +
                     StructureBBDD.COLUMN3_PRODUCTS + " TEXT," +
                     StructureBBDD.COLUMN4_PRODUCTS + " TEXT," +
-                    StructureBBDD.COLUMN5_PRODUCTS + " INTEGER PRIMARY KEY," +
+                    StructureBBDD.COLUMN5_PRODUCTS + " TEXT," +
                     StructureBBDD.COLUMN6_PRODUCTS + " TEXT)";
 
 }

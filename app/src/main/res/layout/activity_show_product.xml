@@ -6,40 +6,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    tools:context="hinojalrobledo.myapplication.activities.ViewUser">
+    tools:context="hinojalrobledo.myapplication.activities.ShowProduct">
 
     <TextView
+        android:id="@+id/tv_nameProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bienvenido"
+        android:text=""
+        android:textSize="40sp"
+        android:layout_gravity="center"
+    />
+    <TextView
+        android:id="@+id/tv_descriptionProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
         android:textSize="30sp"
         android:layout_gravity="center"
     />
     <TextView
-        android:id="@+id/tvEmailUser"
+        android:id="@+id/tv_priceProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:textSize="50sp"
+        android:layout_gravity="center"
+    />
+    <TextView
+        android:id="@+id/tv_emailSellerProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/buttonContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="250dp"
+        android:layout_gravity="center"
+        android:text="CONTACTAR"
         android:textSize="35sp"
-        android:layout_gravity="center"
     />
 
-    <Button
-        android:id="@+id/buttonBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:width="150dp"
-        android:text="COMPRAR"
-        android:textSize="25sp"
-    />
-
-    <Button
-        android:id="@+id/buttonSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:width="150dp"
-        android:text="VENDER"
-        android:textSize="25sp" />
 </LinearLayout>

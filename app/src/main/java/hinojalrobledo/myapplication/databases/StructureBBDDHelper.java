@@ -1,4 +1,4 @@
-package hinojalrobledo.myapplication;
+package hinojalrobledo.myapplication.databases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

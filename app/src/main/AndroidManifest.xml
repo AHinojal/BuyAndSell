@@ -15,17 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginUser">
+        <activity android:name=".activities.LoginUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewUser" />
-        <activity android:name=".RegisterUser" />
-        <activity android:name=".SellProduct" />
-        <activity android:name=".BuyProduct"></activity>
+        <activity android:name=".activities.ViewUser" />
+        <activity android:name=".activities.RegisterUser" />
+        <activity android:name=".activities.SellProduct" />
+        <activity android:name=".activities.ShowProduct" />
+        <activity android:name=".activities.ListProducts"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package hinojalrobledo.myapplication;
+package hinojalrobledo.myapplication.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hinojalrobledo.myapplication.R;
+import hinojalrobledo.myapplication.databases.StructureBBDD;
+import hinojalrobledo.myapplication.databases.StructureBBDDHelper;
 
 public class LoginUser extends AppCompatActivity {
     TextView tvRegister;
