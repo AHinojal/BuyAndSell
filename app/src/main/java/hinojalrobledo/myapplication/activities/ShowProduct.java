@@ -1,6 +1,7 @@
 package hinojalrobledo.myapplication.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ public class ShowProduct extends AppCompatActivity {
 
     Button buttonContact;
     TextView nameProductBuy,descriptionProductBuy,priceProductBuy,emailSellerProductBuy;
-
+    private Typeface typeFace1,typeFace2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,14 @@ public class ShowProduct extends AppCompatActivity {
         priceProductBuy = (TextView) findViewById(R.id.tv_priceProduct);
         emailSellerProductBuy = (TextView) findViewById(R.id.tv_emailSellerProduct);
 
+        typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
+        typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
+
+        buttonContact.setTypeface(typeFace2);
+        nameProductBuy.setTypeface(typeFace2);
+        descriptionProductBuy.setTypeface(typeFace1);
+        priceProductBuy.setTypeface(typeFace2);
+        emailSellerProductBuy.setTypeface(typeFace1);
 
         Bundle extra = getIntent().getExtras();
         String nameProduct = null;
@@ -46,6 +55,8 @@ public class ShowProduct extends AppCompatActivity {
             emailSellerProduct = extra.getString("emailSellerProduct");
             emailSellerProductBuy.setText(emailSellerProduct);
         }
+
+
 
         buttonContact.setOnClickListener(new View.OnClickListener() {
             @Override

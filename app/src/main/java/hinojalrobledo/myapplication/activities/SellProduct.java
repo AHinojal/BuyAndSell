@@ -3,6 +3,7 @@ package hinojalrobledo.myapplication.activities;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class SellProduct extends AppCompatActivity {
     ImageButton imageProduct;
     EditText nameProduct,descriptionProduct,priceProduct, emailSeller;
     Button buttonSend;
+    private Typeface typeFace1,typeFace2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,11 @@ public class SellProduct extends AppCompatActivity {
         priceProduct = (EditText) findViewById(R.id.et_priceProduct);
         buttonSend = (Button) findViewById(R.id.buttonSend);
         emailSeller = (EditText) findViewById(R.id.et_emailSeller);
+
+        typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
+        typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
+
+        buttonSend.setTypeface(typeFace2);
 
         final StructureBBDDHelper helper;
 

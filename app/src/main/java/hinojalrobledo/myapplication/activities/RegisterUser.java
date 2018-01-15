@@ -3,11 +3,14 @@ package hinojalrobledo.myapplication.activities;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import hinojalrobledo.myapplication.R;
@@ -17,6 +20,8 @@ import hinojalrobledo.myapplication.databases.StructureBBDDHelper;
 public class RegisterUser extends AppCompatActivity {
 
     private Button buttonRegister;
+    private Typeface typeFace2,typeFace1;
+    private TextView textRegister;
 
     private EditText textEmail, textName, textSurname, textPhoneNumber, textPassword;
 
@@ -32,6 +37,16 @@ public class RegisterUser extends AppCompatActivity {
         textSurname = (EditText) findViewById(R.id.etSurnameUser);
         textPassword = (EditText) findViewById(R.id.etPasswordUser);
         textPhoneNumber = (EditText) findViewById(R.id.etPhoneNumberUser);
+        textRegister = (TextView) findViewById(R.id.textRegister);
+
+        //String tuString = "<b>REGISTRO DE USUARIO</b>";
+        //textRegister.setText(Html.fromHtml(tuString));
+
+        typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
+        typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
+
+        textRegister.setTypeface(typeFace2);
+        buttonRegister.setTypeface(typeFace2);
 
         final StructureBBDDHelper helper = new StructureBBDDHelper (this);
 

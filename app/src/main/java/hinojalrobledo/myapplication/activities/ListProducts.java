@@ -3,6 +3,7 @@ package hinojalrobledo.myapplication.activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class ListProducts extends AppCompatActivity {
     StructureBBDDHelper helper;
     ArrayList<String> informationList;
     ArrayList<Product> productList;
+    private Typeface typeFace1,typeFace2;
 
     String nameProduct, descriptionProduct, priceProduct, emailSellerProduct;
 
@@ -35,6 +37,9 @@ public class ListProducts extends AppCompatActivity {
         getSupportActionBar().hide();
 
         listView_products = (ListView) findViewById(R.id.lv_listProducts);
+
+        typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
+        typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
 
         helper = new StructureBBDDHelper(this);
 
@@ -116,7 +121,6 @@ public class ListProducts extends AppCompatActivity {
             p.setDescription(cursor.getString(3));
             p.setPrice(cursor.getString(4));
             p.setEmailSeller(cursor.getString(5));
-
             productList.add(p);
         }
         giveList();
@@ -125,7 +129,7 @@ public class ListProducts extends AppCompatActivity {
     private void giveList() {
         informationList = new ArrayList<String>();
         for(int i=0;i<productList.size();i++){
-            informationList.add(productList.get(i).getName() + " - " + productList.get(i).getDescription() + " - " + productList.get(i).getPrice());
+            informationList.add(productList.get(i).getName() + " --- Precio: " + productList.get(i).getPrice() + "€");
         }
     }
 

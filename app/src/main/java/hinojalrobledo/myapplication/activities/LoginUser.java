@@ -3,9 +3,11 @@ package hinojalrobledo.myapplication.activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +20,12 @@ import hinojalrobledo.myapplication.databases.StructureBBDD;
 import hinojalrobledo.myapplication.databases.StructureBBDDHelper;
 
 public class LoginUser extends AppCompatActivity {
-    TextView tvRegister;
-    TextView tvStartSession;
+    Button logIn,register;
 
     EditText emailUser;
     EditText passwordUser;
+
+    Typeface typeFace1,typeFace2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,16 @@ public class LoginUser extends AppCompatActivity {
 
         emailUser = (EditText) findViewById (R.id.et_EmailUser);
         passwordUser = (EditText) findViewById (R.id.et_PasswordUser);
+        logIn = (Button) findViewById (R.id.startSession);
+        register = (Button) findViewById (R.id.buttonRegister);
 
-        tvRegister = (TextView) findViewById(R.id.buttonRegister);
-        tvRegister.setOnClickListener(new View.OnClickListener() {
+        typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
+        typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
+
+        logIn.setTypeface(typeFace2);
+        register.setTypeface(typeFace2);
+
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Para que un activity llame a otro activity -> Intent
@@ -43,8 +53,8 @@ public class LoginUser extends AppCompatActivity {
         });
 
         final StructureBBDDHelper helper = new StructureBBDDHelper (this);
-        tvStartSession = (TextView) findViewById(R.id.startSession);
-        tvStartSession.setOnClickListener(new View.OnClickListener() {
+
+        logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = helper.getReadableDatabase();

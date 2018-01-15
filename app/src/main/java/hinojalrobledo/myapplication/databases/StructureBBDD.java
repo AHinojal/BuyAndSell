@@ -25,7 +25,7 @@ public class StructureBBDD {
 
     public static final String CREATE_TABLE_USERS =
             "CREATE TABLE " + StructureBBDD.TABLE_USERS + " (" +
-                    StructureBBDD.COLUMN1_USERS + " TEXT," +
+                    StructureBBDD.COLUMN1_USERS + " TEXT PRIMARY KEY," +
                     StructureBBDD.COLUMN2_USERS + " INTEGER PRIMARY KEY," +
                     StructureBBDD.COLUMN3_USERS + " TEXT," +
                     StructureBBDD.COLUMN4_USERS + " TEXT," +
