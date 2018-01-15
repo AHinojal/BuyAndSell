@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="ACEPTAR"
+        android:background="@drawable/borders_buttons"
         android:textSize="20sp"
         android:width="150dp"
     />

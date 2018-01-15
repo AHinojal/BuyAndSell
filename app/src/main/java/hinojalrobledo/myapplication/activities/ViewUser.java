@@ -18,6 +18,7 @@ public class ViewUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user);
+        getSupportActionBar().hide();
 
         buttonBuy = (Button) findViewById(R.id.buttonBuy);
         buttonSell = (Button) findViewById(R.id.buttonSell);

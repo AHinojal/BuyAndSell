@@ -32,6 +32,7 @@ public class ListProducts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_products);
+        getSupportActionBar().hide();
 
         listView_products = (ListView) findViewById(R.id.lv_listProducts);
 
@@ -46,7 +47,6 @@ public class ListProducts extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SQLiteDatabase db = helper.getReadableDatabase();
-
 
                 // Define a projection that specifies which columns from the database
                 // you will actually use after this query.

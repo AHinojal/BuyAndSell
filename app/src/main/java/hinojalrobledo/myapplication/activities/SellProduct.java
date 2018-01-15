@@ -27,6 +27,7 @@ public class SellProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_product);
+        getSupportActionBar().hide();
 
         imageProduct = (ImageButton) findViewById(R.id.imageProduct);
         nameProduct = (EditText) findViewById(R.id.et_productName);
