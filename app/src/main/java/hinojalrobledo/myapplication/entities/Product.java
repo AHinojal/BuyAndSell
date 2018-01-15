@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
     private Integer id;
-    private String photo;
+    private byte[] photo;
     private String name;
     private String description;
     private String price;
@@ -17,7 +17,7 @@ public class Product implements Serializable {
 
     }
 
-    public Product(Integer id, String photo, String name, String description, String price, String emailSeller){
+    public Product(Integer id, byte[] photo, String name, String description, String price, String emailSeller){
         this.id = id;
         this.photo = photo;
         this.name = name;
@@ -66,11 +66,11 @@ public class Product implements Serializable {
         this.emailSeller = emailSeller;
     }
 
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 }

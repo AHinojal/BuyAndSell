@@ -3,18 +3,17 @@ package hinojalrobledo.myapplication.activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import hinojalrobledo.myapplication.R;
 import hinojalrobledo.myapplication.databases.StructureBBDD;
 import hinojalrobledo.myapplication.databases.StructureBBDDHelper;
@@ -26,9 +25,12 @@ public class ListProducts extends AppCompatActivity {
     StructureBBDDHelper helper;
     ArrayList<String> informationList;
     ArrayList<Product> productList;
+    ImageView prueba;
     private Typeface typeFace1,typeFace2;
 
     String nameProduct, descriptionProduct, priceProduct, emailSellerProduct;
+
+    byte[] imageProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,21 +89,24 @@ public class ListProducts extends AppCompatActivity {
                 cursor.close();*/
 
                 cursor.moveToFirst();
+
+                imageProduct = cursor.getBlob(0);
                 nameProduct = cursor.getString(1);
                 descriptionProduct = cursor.getString(2);
                 priceProduct = cursor.getString(3);
                 emailSellerProduct = cursor.getString(4);
+                
+                setImageViewWithByteArray(prueba,imageProduct);
 
                 //Para que un activity llame a otro activity -> Intent
                 Intent intentViewProduct = new Intent(ListProducts.this, ShowProduct.class);
-
+                intentViewProduct.putExtra("imageProduct", imageProduct);
                 intentViewProduct.putExtra("nameProduct",nameProduct);
                 intentViewProduct.putExtra("descriptionProduct",descriptionProduct);
                 intentViewProduct.putExtra("priceProduct",priceProduct);
                 intentViewProduct.putExtra("emailSellerProduct",emailSellerProduct);
 
                 ListProducts.this.startActivity(intentViewProduct);
-
             }
         });
     }
@@ -112,12 +117,12 @@ public class ListProducts extends AppCompatActivity {
         Product p = null;
         productList = new ArrayList<Product>();
         //select * from table_products
-        Cursor cursor=db.rawQuery("SELECT * FROM "+ StructureBBDD.TABLE_PRODUCTS,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ StructureBBDD.TABLE_PRODUCTS,null);
 
         while (cursor.moveToNext()){
             p = new Product();
             p.setId(cursor.getInt(0));
-            p.setPhoto(cursor.getString(1));
+            p.setPhoto(cursor.getBlob(1));
             p.setName(cursor.getString(2));
             p.setDescription(cursor.getString(3));
             p.setPrice(cursor.getString(4));
@@ -132,6 +137,11 @@ public class ListProducts extends AppCompatActivity {
         for(int i=0;i<productList.size();i++){
             informationList.add(productList.get(i).getName() + " --- Precio: " + productList.get(i).getPrice() + "€");
         }
+    }
+
+    public static void setImageViewWithByteArray(ImageView view, byte[] data) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+        view.setImageBitmap(bitmap);
     }
 
 

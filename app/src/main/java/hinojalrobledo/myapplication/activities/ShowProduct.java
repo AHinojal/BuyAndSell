@@ -1,19 +1,25 @@
 package hinojalrobledo.myapplication.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.sql.Blob;
 
 import hinojalrobledo.myapplication.R;
 
 public class ShowProduct extends AppCompatActivity {
 
+    ImageView imageProductBuy;
     Button buttonContact;
     TextView nameProductBuy,descriptionProductBuy,priceProductBuy,emailSellerProductBuy;
     private Typeface typeFace1,typeFace2;
@@ -25,6 +31,7 @@ public class ShowProduct extends AppCompatActivity {
         //getSupportActionBar().hide();
 
         buttonContact = (Button) findViewById (R.id.buttonContact);
+        imageProductBuy = (ImageView) findViewById(R.id.iv_imageProduct);
         nameProductBuy =  (TextView) findViewById (R.id.tv_nameProduct);
         descriptionProductBuy = (TextView) findViewById(R.id.tv_descriptionProduct);
         priceProductBuy = (TextView) findViewById(R.id.tv_priceProduct);
@@ -40,12 +47,15 @@ public class ShowProduct extends AppCompatActivity {
         emailSellerProductBuy.setTypeface(typeFace1);
 
         Bundle extra = getIntent().getExtras();
+        byte[] imageProduct = null;
         String nameProduct = null;
         String descriptionProduct = null;
         String priceProduct = null;
         String emailSellerProduct = null;
 
         if (extra != null){
+            imageProduct = extra.getByteArray("imageProduct");
+            setImageViewWithByteArray(imageProductBuy,imageProduct);
             nameProduct = extra.getString("nameProduct");
             nameProductBuy.setText(nameProduct);
             descriptionProduct = extra.getString("descriptionProduct");
@@ -63,7 +73,12 @@ public class ShowProduct extends AppCompatActivity {
             }
         });
 
-    };
+    }
+
+    public static void setImageViewWithByteArray(ImageView view, byte[] data) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+        view.setImageBitmap(bitmap);
+    }
 
     public void sendEmail() {
         String[] TO = {emailSellerProductBuy.getText().toString()}; //Aqui se pone el correo del vendedor
@@ -88,5 +103,4 @@ public class ShowProduct extends AppCompatActivity {
             Toast.makeText(ShowProduct.this,"No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

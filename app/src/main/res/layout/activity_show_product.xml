@@ -8,6 +8,14 @@
     android:layout_margin="10dp"
     tools:context="hinojalrobledo.myapplication.activities.ShowProduct">
 
+    <ImageView
+        android:id="@+id/iv_imageProduct"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/imagebase"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center"
+    />
     <TextView
         android:id="@+id/tv_nameProduct"
         android:layout_width="wrap_content"

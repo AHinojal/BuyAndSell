@@ -34,7 +34,7 @@ public class StructureBBDD {
     public static final String CREATE_TABLE_PRODUCTS =
             "CREATE TABLE " + StructureBBDD.TABLE_PRODUCTS + " (" +
                     StructureBBDD.COLUMN1_PRODUCTS + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    StructureBBDD.COLUMN2_PRODUCTS + " TEXT," +
+                    StructureBBDD.COLUMN2_PRODUCTS + " BLOB," +
                     StructureBBDD.COLUMN3_PRODUCTS + " TEXT," +
                     StructureBBDD.COLUMN4_PRODUCTS + " TEXT," +
                     StructureBBDD.COLUMN5_PRODUCTS + " TEXT," +
