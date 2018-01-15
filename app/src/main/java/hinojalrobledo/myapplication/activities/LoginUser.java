@@ -96,8 +96,13 @@ public class LoginUser extends AppCompatActivity {
                     passwordUser.setText(null);
                     Toast.makeText(getApplicationContext(), "Los datos introducidos son erróneos.\n¡Intentelo de nuevo!", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //finish();
+        super.onBackPressed();
     }
 }

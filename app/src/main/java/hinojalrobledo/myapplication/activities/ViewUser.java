@@ -20,7 +20,8 @@ public class ViewUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Inicio");
 
         buttonBuy = (Button) findViewById(R.id.buttonBuy);
         buttonSell = (Button) findViewById(R.id.buttonSell);
@@ -58,7 +59,10 @@ public class ViewUser extends AppCompatActivity {
                 ViewUser.this.startActivity(intentBuyProduct);
             }
         });
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

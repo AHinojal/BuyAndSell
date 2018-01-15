@@ -34,7 +34,8 @@ public class ListProducts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_products);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Lista de productos a la venta");
 
         listView_products = (ListView) findViewById(R.id.lv_listProducts);
 

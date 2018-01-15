@@ -29,7 +29,8 @@ public class SellProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_product);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Poner anuncio");
 
         imageProduct = (ImageButton) findViewById(R.id.imageProduct);
         nameProduct = (EditText) findViewById(R.id.et_productName);
@@ -82,9 +83,10 @@ public class SellProduct extends AppCompatActivity {
 
                     if(newRowId > -1){
                         Toast.makeText(getApplicationContext(), "El anuncio se ha incluido perfectamente", Toast.LENGTH_LONG).show();
-                        Intent intentBackLogin = new Intent(SellProduct.this, ViewUser.class);
-                        intentBackLogin.putExtra("email",emailSeller.getText().toString());
-                        SellProduct.this.startActivity(intentBackLogin);
+                        //Intent intentBackLogin = new Intent(SellProduct.this, ViewUser.class);
+                        //intentBackLogin.putExtra("email",emailSeller.getText().toString());
+                        //SellProduct.this.startActivity(intentBackLogin);
+                        finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "No se ha podido guardar el anuncio.\n¡Intentelo de nuevo! ", Toast.LENGTH_LONG).show();
                     }

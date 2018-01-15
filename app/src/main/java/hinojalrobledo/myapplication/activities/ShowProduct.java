@@ -22,7 +22,7 @@ public class ShowProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_product);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         buttonContact = (Button) findViewById (R.id.buttonContact);
         nameProductBuy =  (TextView) findViewById (R.id.tv_nameProduct);
@@ -55,9 +55,7 @@ public class ShowProduct extends AppCompatActivity {
             emailSellerProduct = extra.getString("emailSellerProduct");
             emailSellerProductBuy.setText(emailSellerProduct);
         }
-
-
-
+        getSupportActionBar().setTitle(nameProductBuy.getText());
         buttonContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +74,7 @@ public class ShowProduct extends AppCompatActivity {
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
         //Aqui modificarias el asunto del correo
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Posible comprador B&S: " + nameProductBuy.getText().toString() + " - " + priceProductBuy.getText().toString() + " €");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Posible comprador B&S: " + nameProductBuy.getText().toString() + " - " + priceProductBuy.getText().toString());
         //Aqui modificarias el cuerpo del correo
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Hola, vendedor de BuyAndSell! \n\n" +
                 "Estaría interesado en la oferta que has puesto de: " +  nameProductBuy.getText().toString() + ".\n " +
@@ -84,7 +82,7 @@ public class ShowProduct extends AppCompatActivity {
                 "Un saludo!");
 
         try {
-            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
+            startActivity(Intent.createChooser(emailIntent, "Enviar mensaje al vendedor por:"));
             finish();
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(ShowProduct.this,"No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();

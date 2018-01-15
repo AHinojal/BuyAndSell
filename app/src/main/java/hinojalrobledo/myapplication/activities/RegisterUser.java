@@ -29,7 +29,8 @@ public class RegisterUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Registro de Usuario");
 
         buttonRegister = (Button) findViewById(R.id.btRegister);
         textEmail = (EditText) findViewById(R.id.etEmailUser);
