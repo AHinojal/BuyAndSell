@@ -94,7 +94,7 @@ public class LoginUser extends AppCompatActivity {
                     LoginUser.this.startActivity(intentStartSession);
                 }else{
                     passwordUser.setText(null);
-                    Toast.makeText(getApplicationContext(), "Los datos introducidos son erróneos. ¡Intentelo de nuevo!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Los datos introducidos son erróneos.\n¡Intentelo de nuevo!", Toast.LENGTH_LONG).show();
                 }
 
             }

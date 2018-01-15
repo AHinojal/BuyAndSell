@@ -39,9 +39,6 @@ public class RegisterUser extends AppCompatActivity {
         textPhoneNumber = (EditText) findViewById(R.id.etPhoneNumberUser);
         textRegister = (TextView) findViewById(R.id.textRegister);
 
-        //String tuString = "<b>REGISTRO DE USUARIO</b>";
-        //textRegister.setText(Html.fromHtml(tuString));
-
         typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
         typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
 
@@ -53,27 +50,32 @@ public class RegisterUser extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Gets the data repository in write mode
-                SQLiteDatabase db = helper.getWritableDatabase();
+                if(!textEmail.getText().toString().isEmpty() && !textName.getText().toString().isEmpty() &&
+                        !textSurname.getText().toString().isEmpty() && !textPassword.getText().toString().isEmpty() && !textPhoneNumber.getText().toString().isEmpty()){
+                    // Gets the data repository in write mode
+                    SQLiteDatabase db = helper.getWritableDatabase();
 
-                // Create a new map of values, where column names are the keys
-                ContentValues values = new ContentValues();
-                values.put(StructureBBDD.COLUMN1_USERS, textEmail.getText().toString());
-                values.put(StructureBBDD.COLUMN2_USERS, textPhoneNumber.getText().toString());
-                values.put(StructureBBDD.COLUMN3_USERS, textName.getText().toString());
-                values.put(StructureBBDD.COLUMN4_USERS, textSurname.getText().toString());
-                values.put(StructureBBDD.COLUMN5_USERS, textPassword.getText().toString());
+                    // Create a new map of values, where column names are the keys
+                    ContentValues values = new ContentValues();
+                    values.put(StructureBBDD.COLUMN1_USERS, textEmail.getText().toString());
+                    values.put(StructureBBDD.COLUMN2_USERS, textPhoneNumber.getText().toString());
+                    values.put(StructureBBDD.COLUMN3_USERS, textName.getText().toString());
+                    values.put(StructureBBDD.COLUMN4_USERS, textSurname.getText().toString());
+                    values.put(StructureBBDD.COLUMN5_USERS, textPassword.getText().toString());
 
-                long newRowId = db.insert(StructureBBDD.TABLE_USERS, null, values);
+                    long newRowId = db.insert(StructureBBDD.TABLE_USERS, null, values);
 
-                if(newRowId > -1){
-                    Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_LONG).show();
+                    if(newRowId > -1){
+                        Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_LONG).show();
 
-                    //Para que un activity llame a otro activity -> Intent
-                    Intent intentBackLogin = new Intent(RegisterUser.this, LoginUser.class);
-                    RegisterUser.this.startActivity(intentBackLogin);
+                        //Para que un activity llame a otro activity -> Intent
+                        Intent intentBackLogin = new Intent(RegisterUser.this, LoginUser.class);
+                        RegisterUser.this.startActivity(intentBackLogin);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "No se ha podido registrar.\n¡Intentelo de nuevo!", Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                    Toast.makeText(getApplicationContext(), "No se ha podido registrar. ¡Intentelo de nuevo con otro teléfono! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se ha podido registrar.\nFalta algún campo en el formulario. ", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -64,28 +64,34 @@ public class SellProduct extends AppCompatActivity {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Gets the data repository in write mode
-                SQLiteDatabase db = helper.getWritableDatabase();
+                if(!nameProduct.getText().toString().isEmpty() && !descriptionProduct.getText().toString().isEmpty() &&
+                        !priceProduct.getText().toString().isEmpty() && !emailSeller.getText().toString().isEmpty()){
+                    // Gets the data repository in write mode
+                    SQLiteDatabase db = helper.getWritableDatabase();
 
-                // Create a new map of values, where column names are the keys
-                ContentValues values = new ContentValues();
-                values.put(StructureBBDD.COLUMN2_PRODUCTS, nameProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN3_PRODUCTS, nameProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN4_PRODUCTS, descriptionProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN5_PRODUCTS, priceProduct.getText().toString());
-                values.put(StructureBBDD.COLUMN6_PRODUCTS, emailSeller.getText().toString());
+                    // Create a new map of values, where column names are the keys
+                    ContentValues values = new ContentValues();
+                    values.put(StructureBBDD.COLUMN2_PRODUCTS, nameProduct.getText().toString());
+                    values.put(StructureBBDD.COLUMN3_PRODUCTS, nameProduct.getText().toString());
+                    values.put(StructureBBDD.COLUMN4_PRODUCTS, descriptionProduct.getText().toString());
+                    values.put(StructureBBDD.COLUMN5_PRODUCTS, priceProduct.getText().toString());
+                    values.put(StructureBBDD.COLUMN6_PRODUCTS, emailSeller.getText().toString());
 
-                // Insert the new row, returning the primary key value of the new row
-                long newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS, StructureBBDD.COLUMN1_PRODUCTS, values);
+                    // Insert the new row, returning the primary key value of the new row
+                    long newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS, StructureBBDD.COLUMN1_PRODUCTS, values);
 
-                if(newRowId > -1){
-                    Toast.makeText(getApplicationContext(), "El anuncio se ha incluido perfectamente", Toast.LENGTH_LONG).show();
-                    Intent intentBackLogin = new Intent(SellProduct.this, ViewUser.class);
-                    intentBackLogin.putExtra("email",emailSeller.getText().toString());
-                    SellProduct.this.startActivity(intentBackLogin);
+                    if(newRowId > -1){
+                        Toast.makeText(getApplicationContext(), "El anuncio se ha incluido perfectamente", Toast.LENGTH_LONG).show();
+                        Intent intentBackLogin = new Intent(SellProduct.this, ViewUser.class);
+                        intentBackLogin.putExtra("email",emailSeller.getText().toString());
+                        SellProduct.this.startActivity(intentBackLogin);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "No se ha podido guardar el anuncio.\n¡Intentelo de nuevo! ", Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                    Toast.makeText(getApplicationContext(), "No se ha podido guardar. ¡Intentelo de nuevo! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se ha podido crear el anuncio.\nFalta algún campo del formulario", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
     }
