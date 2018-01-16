@@ -25,7 +25,7 @@ public class RegisterUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-        //getSupportActionBar().hide();
+        //Cambia titulo a la barra de acciones
         getSupportActionBar().setTitle("Registro de Usuario");
 
         buttonRegister = (Button) findViewById(R.id.btRegister);
@@ -35,36 +35,34 @@ public class RegisterUser extends AppCompatActivity {
         textPassword = (EditText) findViewById(R.id.etPasswordUser);
         textPhoneNumber = (EditText) findViewById(R.id.etPhoneNumberUser);
 
+        //Crea un nuevo estilo de tipografia a partir de la fuente y lo modifica
         typeFace = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
-
         buttonRegister.setTypeface(typeFace);
 
         final StructureBBDDHelper helper = new StructureBBDDHelper (this);
-
+        //Lo que ocurre al pulsar el boton de aceptar
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Comprueba que todos los campos esten rellenos
                 if(!textEmail.getText().toString().isEmpty() && !textName.getText().toString().isEmpty() &&
                         !textSurname.getText().toString().isEmpty() && !textPassword.getText().toString().isEmpty() && !textPhoneNumber.getText().toString().isEmpty()){
-                    // Gets the data repository in write mode
+                    // Le dice a la BBDD que esta en modo escritura
                     SQLiteDatabase db = helper.getWritableDatabase();
 
-                    // Create a new map of values, where column names are the keys
+                    // Crea un contenedor de valores, donde cada columna sera rellenada
                     ContentValues values = new ContentValues();
                     values.put(StructureBBDD.COLUMN1_USERS, textEmail.getText().toString());
                     values.put(StructureBBDD.COLUMN2_USERS, textPhoneNumber.getText().toString());
                     values.put(StructureBBDD.COLUMN3_USERS, textName.getText().toString());
                     values.put(StructureBBDD.COLUMN4_USERS, textSurname.getText().toString());
                     values.put(StructureBBDD.COLUMN5_USERS, textPassword.getText().toString());
-
+                    //Inserta en la BBDD y nos devuelve el id
                     long newRowId = db.insert(StructureBBDD.TABLE_USERS, null, values);
 
+                    //Si es > 1 nos habra registrado, si no, se habra repetido la primary key (numero de telefono)
                     if(newRowId > -1){
                         Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_LONG).show();
-
-                        //Para que un activity llame a otro activity -> Intent
-                        //Intent intentBackLogin = new Intent(RegisterUser.this, LoginUser.class);
-                        //RegisterUser.this.startActivity(intentBackLogin);
                         finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "No se ha podido registrar.\n¡Intentelo de nuevo!", Toast.LENGTH_LONG).show();

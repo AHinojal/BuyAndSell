@@ -5,21 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="hinojalrobledo.myapplication.activities.ListProducts">
-    <ImageView
-        android:id="@+id/prueba"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/imagebase"
-        android:scaleType="fitCenter"
-        android:layout_gravity="center"
-        />
 
     <ListView
         android:id="@+id/lv_listProducts"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-
-
     </ListView>
 
 </LinearLayout>

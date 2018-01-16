@@ -25,39 +25,35 @@ public class ListProducts extends AppCompatActivity {
     StructureBBDDHelper helper;
     ArrayList<String> informationList;
     ArrayList<Product> productList;
-    ImageView prueba;
-    private Typeface typeFace1,typeFace2;
 
     String nameProduct, descriptionProduct, priceProduct, emailSellerProduct;
-
-    byte[] imageProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_products);
-        //getSupportActionBar().hide();
+        //Cambia titulo a la barra de acciones
         getSupportActionBar().setTitle("Lista de productos a la venta");
 
         listView_products = (ListView) findViewById(R.id.lv_listProducts);
 
-        typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
-        typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
-
         helper = new StructureBBDDHelper(this);
 
+        //Consulta la lista de pedidos
         consultProductList();
 
+        //Devuelve a una vista cada objeto de un array de objetos que le pasemos
+        //Es decir, nos devuelve toda la informacion que queremos que muestre por pantalla
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,informationList);
         listView_products.setAdapter(adapter);
 
         listView_products.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Le dice a la BBDD que esta en modo lectura
                 SQLiteDatabase db = helper.getReadableDatabase();
 
-                // Define a projection that specifies which columns from the database
-                // you will actually use after this query.
+                // Aqui ponemos los datos de la columna que queremos que nos den
                 String[] projection = {
                         StructureBBDD.COLUMN2_PRODUCTS,
                         StructureBBDD.COLUMN3_PRODUCTS,
@@ -66,40 +62,36 @@ public class ListProducts extends AppCompatActivity {
                         StructureBBDD.COLUMN6_PRODUCTS
                 };
 
-                // Filter results WHERE "title" = 'My Title'
+                // Como filtramos la busqueda --> por la id
                 String selection = StructureBBDD.COLUMN1_PRODUCTS + " = ?";
+                //Posicion del elemento que pinchamos en la ListView
                 String pos = Integer.toString(position+1);
                 String[] selectionArgs = {pos};
 
+                //Busqueda
                 Cursor cursor = db.query(
-                        StructureBBDD.TABLE_PRODUCTS,                     // The table to query
+                StructureBBDD.TABLE_PRODUCTS,                     // The table to query
                         projection,                               // The columns to return
                         selection,                                // The columns for the WHERE clause
                         selectionArgs,                            // The values for the WHERE clause
-                        null,                                     // don't group the rows
-                        null,                                     // don't filter by row groups
+                        null,                              // don't group the rows
+                        null,                                // don't filter by row groups
                         null                                // The sort order
                 );
 
-                /*List itemIds = new ArrayList<>();
-                while (cursor.moveToNext()) {
-                    long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(StructureBBDD.COLUMN1_USERS));
-                    itemIds.add(itemId);
-                }
-                cursor.close();*/
-
+                //Ponemos el cursor en primer elemento que nos den
                 cursor.moveToFirst();
 
-                imageProduct = cursor.getBlob(0);
+                //Devolvemos en una variable los elementos que obtenemos en la busqueda
+                byte[] imageProduct = cursor.getBlob(0);
                 nameProduct = cursor.getString(1);
                 descriptionProduct = cursor.getString(2);
                 priceProduct = cursor.getString(3);
                 emailSellerProduct = cursor.getString(4);
-                
-                setImageViewWithByteArray(prueba,imageProduct);
 
                 //Para que un activity llame a otro activity -> Intent
                 Intent intentViewProduct = new Intent(ListProducts.this, ShowProduct.class);
+                //Pasamos los elementos obtenidos a la siguiente vista
                 intentViewProduct.putExtra("imageProduct", imageProduct);
                 intentViewProduct.putExtra("nameProduct",nameProduct);
                 intentViewProduct.putExtra("descriptionProduct",descriptionProduct);
@@ -116,9 +108,10 @@ public class ListProducts extends AppCompatActivity {
 
         Product p = null;
         productList = new ArrayList<Product>();
-        //select * from table_products
+        //Hacemos la busqueda --> Select * from table_products
         Cursor cursor = db.rawQuery("SELECT * FROM "+ StructureBBDD.TABLE_PRODUCTS,null);
 
+        //Recorremos toda la tabla
         while (cursor.moveToNext()){
             p = new Product();
             p.setId(cursor.getInt(0));
@@ -132,17 +125,11 @@ public class ListProducts extends AppCompatActivity {
         giveList();
     }
 
+    //Recorremos la lista de productos y rellenamos una lista con la info a mostrar
     private void giveList() {
         informationList = new ArrayList<String>();
         for(int i=0;i<productList.size();i++){
             informationList.add(productList.get(i).getName() + " --- Precio: " + productList.get(i).getPrice() + "€");
         }
     }
-
-    public static void setImageViewWithByteArray(ImageView view, byte[] data) {
-        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-        view.setImageBitmap(bitmap);
-    }
-
-
 }

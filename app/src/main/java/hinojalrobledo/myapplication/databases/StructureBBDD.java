@@ -1,9 +1,10 @@
 package hinojalrobledo.myapplication.databases;
 
 public class StructureBBDD {
-    // To prevent someone from accidentally instantiating the contract class,
-    // make the constructor private.
-    public StructureBBDD() {}
+
+    public StructureBBDD() {
+
+    }
 
         //Constantes Tabla Usuarios
         public static final String TABLE_USERS = "datosUsers";
@@ -22,22 +23,22 @@ public class StructureBBDD {
         public static final String COLUMN5_PRODUCTS = "Precio";
         public static final String COLUMN6_PRODUCTS = "EmailVendedor";
 
+        //Como va a crear las tablas
+        public static final String CREATE_TABLE_USERS =
+                "CREATE TABLE " + StructureBBDD.TABLE_USERS + " (" +
+                        StructureBBDD.COLUMN1_USERS + " TEXT," +
+                        StructureBBDD.COLUMN2_USERS + " INTEGER PRIMARY KEY," +
+                        StructureBBDD.COLUMN3_USERS + " TEXT," +
+                        StructureBBDD.COLUMN4_USERS + " TEXT," +
+                        StructureBBDD.COLUMN5_USERS + " TEXT)";
 
-    public static final String CREATE_TABLE_USERS =
-            "CREATE TABLE " + StructureBBDD.TABLE_USERS + " (" +
-                    StructureBBDD.COLUMN1_USERS + " TEXT," +
-                    StructureBBDD.COLUMN2_USERS + " INTEGER PRIMARY KEY," +
-                    StructureBBDD.COLUMN3_USERS + " TEXT," +
-                    StructureBBDD.COLUMN4_USERS + " TEXT," +
-                    StructureBBDD.COLUMN5_USERS + " TEXT)";
-
-    public static final String CREATE_TABLE_PRODUCTS =
-            "CREATE TABLE " + StructureBBDD.TABLE_PRODUCTS + " (" +
-                    StructureBBDD.COLUMN1_PRODUCTS + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    StructureBBDD.COLUMN2_PRODUCTS + " BLOB," +
-                    StructureBBDD.COLUMN3_PRODUCTS + " TEXT," +
-                    StructureBBDD.COLUMN4_PRODUCTS + " TEXT," +
-                    StructureBBDD.COLUMN5_PRODUCTS + " TEXT," +
-                    StructureBBDD.COLUMN6_PRODUCTS + " TEXT)";
+        public static final String CREATE_TABLE_PRODUCTS =
+                "CREATE TABLE " + StructureBBDD.TABLE_PRODUCTS + " (" +
+                        StructureBBDD.COLUMN1_PRODUCTS + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        StructureBBDD.COLUMN2_PRODUCTS + " BLOB," +
+                        StructureBBDD.COLUMN3_PRODUCTS + " TEXT," +
+                        StructureBBDD.COLUMN4_PRODUCTS + " TEXT," +
+                        StructureBBDD.COLUMN5_PRODUCTS + " TEXT," +
+                        StructureBBDD.COLUMN6_PRODUCTS + " TEXT)";
 
 }

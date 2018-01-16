@@ -28,7 +28,6 @@ public class ShowProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_product);
-        //getSupportActionBar().hide();
 
         buttonContact = (Button) findViewById (R.id.buttonContact);
         imageProductBuy = (ImageView) findViewById(R.id.iv_imageProduct);
@@ -72,7 +71,6 @@ public class ShowProduct extends AppCompatActivity {
                 sendEmail();
             }
         });
-
     }
 
     public static void setImageViewWithByteArray(ImageView view, byte[] data) {

@@ -37,12 +37,15 @@ public class LoginUser extends AppCompatActivity {
         logIn = (Button) findViewById (R.id.startSession);
         register = (Button) findViewById (R.id.buttonRegister);
 
+        //Crea un nuevo estilo de tipografia a partir de la fuente
         typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
         typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
 
+        //Cambia la topografia de letra
         logIn.setTypeface(typeFace2);
         register.setTypeface(typeFace2);
 
+        //Al pulsar al boton de registro, le envia a esa activity
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,18 +57,19 @@ public class LoginUser extends AppCompatActivity {
 
         final StructureBBDDHelper helper = new StructureBBDDHelper (this);
 
+        //Al pulsar el boton, comprobara si el correo y la pass son iguales a alguno de la BBDD
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Le dice a la BBDD que esta en modo lectura
                 SQLiteDatabase db = helper.getReadableDatabase();
 
-                // Define a projection that specifies which columns from the database
-                // you will actually use after this query.
+                // Aqui ponemos los datos de la columna que queremos que nos den
                 String[] projection = {
                         StructureBBDD.COLUMN1_USERS,
                 };
 
-                // Filter results WHERE "title" = 'My Title'
+                // Como filtramos la busqueda --> por email y pass
                 String selection = StructureBBDD.COLUMN1_USERS + " = ? and " + StructureBBDD.COLUMN5_USERS + " = ?" ;
                 String[] selectionArgs = {emailUser.getText().toString(), passwordUser.getText().toString()};
 
@@ -79,6 +83,7 @@ public class LoginUser extends AppCompatActivity {
                         null                                // The sort order
                 );
 
+                //Mete en un array el resultado
                 List itemIds = new ArrayList<>();
                 while(cursor.moveToNext()) {
                     long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(StructureBBDD.COLUMN1_USERS));
@@ -86,7 +91,7 @@ public class LoginUser extends AppCompatActivity {
                 }
                 cursor.close();
 
-                //Si coincide email y contraseña --> Entra en la app
+                //Si coincide email y contraseña, es decir, esta dentro del array itemIds --> Entra en la app
                 if (!itemIds.isEmpty()){
                     //Para que un activity llame a otro activity -> Intent
                     Intent intentStartSession = new Intent(LoginUser.this, ViewUser.class);

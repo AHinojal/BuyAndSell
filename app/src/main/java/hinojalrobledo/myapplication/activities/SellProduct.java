@@ -39,7 +39,7 @@ public class SellProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_product);
-        //getSupportActionBar().hide();
+        //Cambia titulo a la barra de acciones
         getSupportActionBar().setTitle("Poner anuncio");
 
         imageProduct = (ImageView) findViewById(R.id.imageProduct);
@@ -52,11 +52,12 @@ public class SellProduct extends AppCompatActivity {
 
         typeFace1 = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
         typeFace2 = Typeface.createFromAsset(getAssets(),"fonts/Headache.ttf");
-
+        //Cambia la topografia de letra
         buttonSend.setTypeface(typeFace2);
 
         final StructureBBDDHelper helper;
 
+        //Esto, con lo que nos han pasado en el intent, podemos rellenar el campo del email
         Bundle extra = getIntent().getExtras();
         String emailUser = null;
         if (extra != null){
@@ -65,12 +66,12 @@ public class SellProduct extends AppCompatActivity {
         }
 
         helper = new StructureBBDDHelper(getApplicationContext());
-
+        //Al pulsar el boton, nos dara la opcion de insertar foto a traves de la galeria
         buttonAddImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
+                intent.setType("image/");
                 startActivityForResult(intent.createChooser(intent,"Selecciona una fotografía"),10);
             }
         });
@@ -78,9 +79,10 @@ public class SellProduct extends AppCompatActivity {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Comprueba que todos los campos esten rellenos, menos la foto
                 if(!nameProduct.getText().toString().isEmpty() && !descriptionProduct.getText().toString().isEmpty() &&
                         !priceProduct.getText().toString().isEmpty() && !emailSeller.getText().toString().isEmpty()){
-                    // Gets the data repository in write mode
+                    // Le dice a la BBDD que esta en modo escritura
                     SQLiteDatabase db = helper.getWritableDatabase();
                     long newRowId = -2; //Inicializacion basura
 
@@ -88,7 +90,7 @@ public class SellProduct extends AppCompatActivity {
                     try{
                         byte[] entryImage = imageViewToByte(imageProduct);
 
-                        // Create a new map of values, where column names are the keys
+                        // Crea un contenedor de valores, donde cada columna sera rellenadas
                         ContentValues values = new ContentValues();
 
                         values.put(StructureBBDD.COLUMN2_PRODUCTS, entryImage);
@@ -97,32 +99,13 @@ public class SellProduct extends AppCompatActivity {
                         values.put(StructureBBDD.COLUMN5_PRODUCTS, priceProduct.getText().toString());
                         values.put(StructureBBDD.COLUMN6_PRODUCTS, emailSeller.getText().toString());
 
-                        // Insert the new row, returning the primary key value of the new row
+                        //Inserta en la BBDD y nos devuelve el id
                         newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS, StructureBBDD.COLUMN1_PRODUCTS, values);
-
                     }catch (Exception e){
 
                     }
-
-                    /*
-                    // Create a new map of values, where column names are the keys
-                    ContentValues values = new ContentValues();
-
-                    values.put(StructureBBDD.COLUMN2_PRODUCTS, nameProduct.getText().toString());
-                    values.put(StructureBBDD.COLUMN3_PRODUCTS, nameProduct.getText().toString());
-                    values.put(StructureBBDD.COLUMN4_PRODUCTS, descriptionProduct.getText().toString());
-                    values.put(StructureBBDD.COLUMN5_PRODUCTS, priceProduct.getText().toString());
-                    values.put(StructureBBDD.COLUMN6_PRODUCTS, emailSeller.getText().toString());
-
-                    // Insert the new row, returning the primary key value of the new row
-                    newRowId = db.insert(StructureBBDD.TABLE_PRODUCTS, StructureBBDD.COLUMN1_PRODUCTS, values);
-                    */
-
                     if(newRowId > -1){
                         Toast.makeText(getApplicationContext(), "El anuncio se ha incluido perfectamente", Toast.LENGTH_LONG).show();
-                        //Intent intentBackLogin = new Intent(SellProduct.this, ViewUser.class);
-                        //intentBackLogin.putExtra("email",emailSeller.getText().toString());
-                        //SellProduct.this.startActivity(intentBackLogin);
                         finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "No se ha podido guardar el anuncio.\n¡Intentelo de nuevo! ", Toast.LENGTH_LONG).show();
@@ -133,27 +116,30 @@ public class SellProduct extends AppCompatActivity {
 
             }
 
+            //Convierte la imagen en bytes para poder meterlo en la tabla
             private byte[] imageViewToByte(ImageView image) {
                 Bitmap bmp = ((BitmapDrawable) image.getDrawable()).getBitmap();
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG,100,bos);
+                bmp.compress(Bitmap.CompressFormat.PNG,10,bos);
                 byte[] byteArray = bos.toByteArray();
                 return byteArray;
             }
         });
     }
 
+    //Para que meta la imagen elegida a traves de la ruta en el imageView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK){
+            //Coge la ruta
             Uri path = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(path);
-
+                //Transforma la imagen en un bitmap para luego poder transformarlo en bytes y meter la imagen en la BBDD
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                //Cambia la imagen predefinida por la elegida por le usuario
                 imageProduct.setImageBitmap(bitmap);
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
